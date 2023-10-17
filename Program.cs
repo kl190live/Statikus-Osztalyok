@@ -18,6 +18,12 @@ namespace Statikus_Osztalyok
 			{ 
             Console.WriteLine(Veletlen.VelKarakter('A','D'));
 			}
+			for (int i = 0; i < 5; i++)
+			{
+                Console.WriteLine(Veletlen.VelTeljesNev(Veletlen.NEM.FERFI));
+				Console.WriteLine(Veletlen.VelTeljesNev(Veletlen.NEM.NO));
+			}
+
 		}
 
 

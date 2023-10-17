@@ -10,6 +10,13 @@ namespace Statikus_Osztalyok
 	internal static class Veletlen
 	{
 		// private string abc;
+		public enum NEM
+		{ 
+			FERFI,
+			NO
+		}
+
+
 		private static Random RND = new Random();
 		private static List<string> VEZETEKNEVEK=Feltolt("files/veznev.txt");
 		private static List<string> FERFI_KERESZTNEVEK = Feltolt("files/ferfikernev.txt");
@@ -21,7 +28,7 @@ namespace Statikus_Osztalyok
 
 			using (StreamReader sr=new StreamReader(fajlnev))
 			{ 
-				while (sr.EndOfStream) 
+				while (!sr.EndOfStream) 
 				{
 					var line = sr.ReadLine();
 					list.Add(line);
@@ -40,6 +47,39 @@ namespace Statikus_Osztalyok
 		{
 			return (char)VelEgesz(min,max);
 		}
+
+		public static string VelVezetekNev()
+		{ 
+			return VEZETEKNEVEK[RND.Next(VEZETEKNEVEK.Count)];
+		}
+
+		private static string VelFerfiKeresztnev()
+		{
+			return FERFI_KERESZTNEVEK[RND.Next(FERFI_KERESZTNEVEK.Count)];
+		}
+		private static string VelNoiKeresztnev()
+		{
+			return NOI_KERESZTNEVEK[RND.Next(NOI_KERESZTNEVEK.Count)];
+		}
+
+
+		public static string VelKeresztNev(NEM nem)
+		{
+			if (nem == NEM.FERFI)
+			{
+				return VelFerfiKeresztnev();
+			}
+			else
+			{
+				return VelNoiKeresztnev();
+			}
+		}
+
+		public static string VelTeljesNev(NEM nem)
+		{ 
+			return VelVezetekNev()+" "+VelKeresztNev(nem);
+		}
+
 
 	}
 }
