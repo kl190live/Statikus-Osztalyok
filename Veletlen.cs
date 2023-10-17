@@ -25,7 +25,7 @@ namespace Statikus_Osztalyok
 		private static List<string> Feltolt(string fajlnev)
 		{ 
 			var list = new List<string>();
-
+			File.ReadAllLines(fajlnev).ToList();
 			using (StreamReader sr=new StreamReader(fajlnev))
 			{ 
 				while (!sr.EndOfStream) 
@@ -36,6 +36,7 @@ namespace Statikus_Osztalyok
 			}
 
 			return list;
+			//File.ReadAllLines(fajlnev).ToList();
 		}
 
 		public static int VelEgesz(int min, int max)
@@ -80,6 +81,50 @@ namespace Statikus_Osztalyok
 			return VelVezetekNev()+" "+VelKeresztNev(nem);
 		}
 
+			public static string VelDatum(int ev1, int ev2)
+			{
+				if (ev1 > ev2)
+				{
+					int temp = ev1;
+					ev1 = ev2;
+					ev2 = temp;
+				}
 
+
+
+				int ev = RND.Next(ev1, ev2 + 1);
+				int honap = RND.Next(1, 13);
+				int nap = RND.Next(1, DateTime.DaysInMonth(ev, honap) + 1);
+
+
+
+				DateTime datum = new DateTime(ev, honap, nap);
+				return datum.ToString("yyyy-MM-dd");
+			}
+
+		public static string VelEmail(string nev)
+		{
+			NEM nem = new NEM();
+			nev = VelTeljesNev(nem).ToLower();
+			for (int i = 0; i < nev.Length; i++)
+			{
+				switch (nev[i])
+				{
+					case 'á': nev += 'a'; break;
+					case 'é': nev += 'e'; break;
+					case 'í': nev += 'i'; break;
+					case 'ö': nev += 'o'; break;
+					case 'ő': nev += 'o'; break;
+					case 'ó': nev += 'o'; break;
+					case 'ú': nev += 'u'; break;
+					case 'ü': nev += 'u'; break;
+					case 'ű': nev += 'u'; break;
+					default: nev += nev[i]; break;
+				}
+				
+				return nev + "@gmail.com";
+			}
+
+		}
 	}
 }

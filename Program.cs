@@ -24,6 +24,11 @@ namespace Statikus_Osztalyok
 				Console.WriteLine(Veletlen.VelTeljesNev(Veletlen.NEM.NO));
 			}
 
+			for (int i = 0; i < 5; i++)
+			{
+				Console.WriteLine(Veletlen.VelEmail(""));
+			}
+
 		}
 
 
